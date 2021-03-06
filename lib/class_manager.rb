@@ -1,15 +1,17 @@
-
+require './lib/braille_dictionary'
 class ClassManager
   attr_reader :file1,
               :file2,
-              :file1_message
-              :braille_dictionary
+              :file1_message,
+              :braille_dictionary,
+              :braille_message
 
   def initialize(file1, file2)
     @file1 = file1
     @file2 = file2
     @file1_message =[]
     @braille_dictionary = BrailleDictionary.new
+    @braille_message = nil
   end
 
   def print_message
@@ -24,12 +26,13 @@ class ClassManager
 
   def write_to_next_file
     File.open(@file2, "w") do |f|
-      f.write @file1_message
+      f.write @braille_message.join
     end
   end
 
   def convert_to_braille
-    
+    @braille_message = @file1_message.map do |letter|
+      @braille_dictionary.alphabet_hash[letter]
+    end
   end
 end
-

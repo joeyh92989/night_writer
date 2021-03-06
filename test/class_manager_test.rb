@@ -1,6 +1,7 @@
 require 'minitest/autorun'
 require 'minitest/nyan_cat'
 require './lib/class_manager'
+require './lib/braille_dictionary'
 
 class ClassManagerTest < MiniTest::Test
 
@@ -29,14 +30,14 @@ class ClassManagerTest < MiniTest::Test
   def test_it_can_write_data_to_a_file
     class_manager = ClassManager.new('test_message.txt', 'test_braille.txt')
     class_manager.create_file1_message
-
-    expected = ['h','e','l','l','o', ' ', 'w','o','r','l','d']
-    assert_equal 55, class_manager.write_to_next_file
+    class_manager.convert_to_braille
+    assert_equal 154, class_manager.write_to_next_file
   end
+
   def test_it_can_convert_values_to_braille
     class_manager = ClassManager.new('test_message.txt', 'test_braille.txt')
     class_manager.create_file1_message
-    require 'pry'; binding.pry
-    assert_equal 'answer', object.method
+    class_manager.convert_to_braille
+    assert_equal 11 , class_manager.braille_message.count
   end
 end
