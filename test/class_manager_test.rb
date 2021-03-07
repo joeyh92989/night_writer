@@ -38,6 +38,7 @@ class ClassManagerTest < MiniTest::Test
     class_manager = ClassManager.new('test_message.txt', 'test_braille.txt')
     class_manager.create_file1_message
     class_manager.convert_to_braille
+    require 'pry'; binding.pry
     assert_equal 11 , class_manager.braille_message.count
   end
 end
