@@ -22,11 +22,11 @@ class ClassManager
   def create_file1_message
     text = (File.readlines(@file1)).join
     split_text = text.split""
-    message_stage = split_text.partition.with_index { |_, index| index <= 79 }
+    message_stage = split_text.partition.with_index { |_, index| index <= 39 }
     until message_stage == [[],[]]
       @file1_message << message_stage.shift
       message_stage.flatten!
-      message_stage =message_stage.partition.with_index { |_, index| index <= 79 }
+      message_stage =message_stage.partition.with_index { |_, index| index <= 39 }
       message_stage
     end
   end
