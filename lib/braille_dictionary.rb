@@ -2,7 +2,7 @@ class BrailleDictionary
   attr_reader :alphabet_hash
   def initialize()
     @alphabet_hash = {
-                      'a' =>["0.","..",".."],
+                      'a' => ["0.","..",".."],
                       'b' => ["0.","0.",".."],
                       'c' => ["00","..",".."],
                       'd' => ["00",".0",".."],

@@ -1,6 +1,6 @@
 require 'minitest/autorun'
 require 'minitest/nyan_cat'
-require './lib/class_manager'
+require './lib/braille_writer'
 require './lib/braille_dictionary'
 
 class BrailleWriterTest < MiniTest::Test
