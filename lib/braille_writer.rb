@@ -1,5 +1,5 @@
 require './lib/braille_dictionary'
-class ClassManager
+class BrailleWriter
   attr_reader :file1,
               :file2,
               :file1_message,
