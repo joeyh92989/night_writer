@@ -21,39 +21,47 @@ class ClassManager
 
   def create_file1_message
     text = (File.readlines(@file1)).join
-    @file1_message = text.split""
-  end
-
-  def write_to_next_file
-    File.open(@file2, "w") do |f|
-      f.write @file1
+    split_text = text.split""
+    message_stage = split_text.partition.with_index { |_, index| index <= 79 }
+    until message_stage == [[],[]]
+      @file1_message << message_stage.shift
+      message_stage.flatten!
+      message_stage =message_stage.partition.with_index { |_, index| index <= 79 }
+      message_stage
     end
   end
 
   def convert_to_braille
-    text_array = @file1_message.map do |letter|
-      (@braille_dictionary.alphabet_hash[letter])
+    text_array = @file1_message.map do |letters|
+      letters.map do |letter|
+        (@braille_dictionary.alphabet_hash[letter])
     end
+   end
       text_array.each do |array|
         @braille_message.push(array)
-      end
+    end
   end
+
   def write_braille
-    line1 = []
-    line2 = []
-    line3 = []
-    @braille_message.each do |line|
-      line1.push(line[0])
-      line2.push(line[1])
-      line3.push(line[2])
-    end
-    line1
-    line2
-    line2
-    File.open(@file2, "w") do |f|
-      f << "#{line1.join}\n" 
-      f << "#{line2.join}\n" 
-      f << "#{line3.join}\n" 
+    File.open(@file2, 'w') {|file| file.truncate(0) }
+    until @braille_message == []
+     line1 = []
+     line2 = []
+     line3 = []
+     @braille_message[0].each do |line|
+       line1.push(line[0])
+       line2.push(line[1])
+       line3.push(line[2])
+     end
+     @braille_message.shift
+     line1
+     line2
+     line2
+     File.open(@file2, "a") do |f|
+       f << "#{line1.join}\n" 
+       f << "#{line2.join}\n" 
+       f << "#{line3.join}\n" 
     end
   end
+end
 end
