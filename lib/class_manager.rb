@@ -24,11 +24,11 @@ class ClassManager
     @file1_message = text.split""
   end
 
-  def write_to_next_file
-    File.open(@file2, "w") do |f|
-      f.write @file1
-    end
-  end
+  # def write_to_next_file
+  #   File.open(@file2, "w") do |f|
+  #     f.write @file1
+  #   end
+  # end
 
   def convert_to_braille
     text_array = @file1_message.map do |letter|

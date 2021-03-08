@@ -27,13 +27,12 @@ class ClassManagerTest < MiniTest::Test
     assert_equal expected, class_manager.file1_message
   end
 
-  def test_it_can_write_data_to_a_file
-    skip
-    class_manager = ClassManager.new('test_message.txt', 'test_braille.txt')
-    class_manager.create_file1_message
-    class_manager.convert_to_braille
-    assert_equal class_manager.file1.length, class_manager.write_to_next_file
-  end
+  # def test_it_can_write_data_to_a_file
+  #   class_manager = ClassManager.new('test_message.txt', 'test_braille.txt')
+  #   class_manager.create_file1_message
+  #   class_manager.convert_to_braille
+  #   assert_equal class_manager.file1.length, class_manager.write_to_next_file
+  # end
 
   def test_it_can_convert_values_to_braille
     class_manager = ClassManager.new('test_message.txt', 'test_braille.txt')
@@ -47,6 +46,6 @@ class ClassManagerTest < MiniTest::Test
     class_manager.create_file1_message
     class_manager.convert_to_braille
     class_manager.write_braille
-    assert_equal false, class_manager.file2.zero?
+    refute_equal nil, File.readlines(class_manager.file2)
   end
 end
