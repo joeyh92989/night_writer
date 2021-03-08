@@ -10,8 +10,8 @@ class EnglishWriter
     @file1 = file1
     @file2 = file2
     @file1_message =[]
-    @braille_dictionary = EnglishDictionary.new
-    @braille_message= []
+    @english_dictionary = EnglishDictionary.new
+    @english_message= []
   end
 
   def print_message
@@ -20,47 +20,48 @@ class EnglishWriter
   end
 
   def create_file1_message
-    text = (File.readlines(@file1)).join
-    split_text = text.split""
-    message_stage = split_text.partition.with_index { |_, index| index <= 39 }
+    lines_array = File.read(@file1).split
+    message_stage = lines_array.partition.with_index { |_, index| index <= 2 }
+    string_container = []
     until message_stage == [[],[]]
-      @file1_message << message_stage.shift
+      string_container << message_stage.shift
       message_stage.flatten!
-      message_stage =message_stage.partition.with_index { |_, index| index <= 39 }
+      message_stage =message_stage.partition.with_index { |_, index| index <= 2 }
       message_stage
     end
+     string_pairs = string_container.map do |v|
+      v.map do |x|
+        x.scan(/.{1,2}/m)
+     end
+    end
+    @file1_message = string_pairs.map do |line|
+      line[0].zip(line[1], line[2])
+    end
+    require 'pry'; binding.pry
   end
 
-  def convert_to_braille
+  def convert_to_english
     text_array = @file1_message.map do |letters|
       letters.map do |letter|
-        (@braille_dictionary.alphabet_hash[letter])
+        (@english_dictionary.alphabet_hash[letter])
     end
    end
       text_array.each do |array|
-        @braille_message.push(array)
+        @english_message.push(array)
     end
   end
 
-  def write_braille
+  def write_english
     File.open(@file2, 'w') {|file| file.truncate(0) }
-    until @braille_message == []
+    until @english_message == []
      line1 = []
-     line2 = []
-     line3 = []
-     @braille_message[0].each do |line|
+     @english_message[0].each do |line|
        line1.push(line[0])
-       line2.push(line[1])
-       line3.push(line[2])
      end
-     @braille_message.shift
+     @english_message.shift
      line1
-     line2
-     line2
      File.open(@file2, "a") do |f|
        f << "#{line1.join}\n" 
-       f << "#{line2.join}\n" 
-       f << "#{line3.join}\n" 
     end
   end
 end

@@ -12,7 +12,6 @@ class EnglishDictionaryTest < MiniTest::Test
   
   def test_it_has_attributes
     ed = EnglishDictionary.new
-    require 'pry'; binding.pry
     assert_equal 27, ed.alphabet_hash.count
   end
 end
