@@ -28,17 +28,25 @@ class ClassManagerTest < MiniTest::Test
   end
 
   def test_it_can_write_data_to_a_file
+    skip
     class_manager = ClassManager.new('test_message.txt', 'test_braille.txt')
     class_manager.create_file1_message
     class_manager.convert_to_braille
-    assert_equal 154, class_manager.write_to_next_file
+    assert_equal class_manager.file1.length, class_manager.write_to_next_file
   end
 
   def test_it_can_convert_values_to_braille
     class_manager = ClassManager.new('test_message.txt', 'test_braille.txt')
     class_manager.create_file1_message
     class_manager.convert_to_braille
-    require 'pry'; binding.pry
-    assert_equal 11 , class_manager.braille_message.count
+    assert_equal class_manager.file1_message.count, class_manager.braille_message.count
+  end
+
+  def test_it_can_write_braille_to_file
+    class_manager = ClassManager.new('test_message.txt', 'test_braille.txt')
+    class_manager.create_file1_message
+    class_manager.convert_to_braille
+    class_manager.write_braille
+    assert_equal false, class_manager.file2.zero?
   end
 end
