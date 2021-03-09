@@ -20,7 +20,7 @@ class BrailleWriterTest < MiniTest::Test
   def test_it_can_add_file1_message
     bw = BrailleWriter.new("test_message.txt", "test_braille.txt")
     bw.create_file1_message
-    require 'pry'; binding.pry
+  
     assert_equal 6, bw.file1_message.count
   end
 
