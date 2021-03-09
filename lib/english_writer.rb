@@ -1,4 +1,4 @@
-require './lib/braille_dictionary'
+require './lib/english_translator'
 class EnglishWriter
   attr_reader :file1,
               :file2,
