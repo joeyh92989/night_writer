@@ -5,7 +5,7 @@ require './lib/braille_dictionary'
 class BrailleWriterTest < MiniTest::Test
 
   def test_it_exists
-    bw = BrailleWriter.new('message.txt', 'test_braille.txt')
+    bw = BrailleWriter.new("test_message.txt", "test_braille.txt")
    
     assert_instance_of BrailleWriter, bw
   end
@@ -16,17 +16,12 @@ class BrailleWriterTest < MiniTest::Test
     assert_equal 'test_message.txt', bw.file1
     assert_equal 'test_braille.txt', bw.file2
   end
-  def test_it_can_store_file_message
-    bw = BrailleWriter.new('test_message.txt', 'test_braille.txt')
-    
-    assert_equal [], bw.file1_message
-  end
-
+  
   def test_it_can_add_file1_message
     bw = BrailleWriter.new("test_message.txt", "test_braille.txt")
     bw.create_file1_message
-    
-    refute_equal 0, bw.file1_message.count
+    require 'pry'; binding.pry
+    assert_equal 6, bw.file1_message.count
   end
 
   def test_it_can_break_down_braille_message
