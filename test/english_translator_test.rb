@@ -18,7 +18,6 @@ class EnglishTranslatorTest < MiniTest::Test
     refute_equal nil, et.file1_message
     assert_equal 40, et.file1_message[0].count
     refute_equal nil, et.english_dictionary
-    assert_equal [], et.english_message
   end
 
   def test_it_can_convert_to_english

@@ -11,6 +11,6 @@ class EnglishDictionaryTest < MiniTest::Test
   
   def test_it_has_attributes
     ed = EnglishDictionary.new
-    assert_equal 26, ed.alphabet_hash.count
+    assert_equal 27, ed.alphabet_hash.count
   end
 end

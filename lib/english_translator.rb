@@ -9,8 +9,9 @@ class EnglishTranslator
     @file1_message = file1_message
     @english_dictionary = EnglishDictionary.new
     @english_message = []
+    convert_to_english
   end
-  
+
   def convert_to_english
     text_array = @file1_message.map do |letters|
       letters.map do |letter|
