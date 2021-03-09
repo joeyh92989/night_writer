@@ -26,7 +26,7 @@ class BrailleWriterTest < MiniTest::Test
     bw = BrailleWriter.new("test_message.txt", "test_braille.txt")
     bw.create_file1_message
     
-    refute_equal nil, bw.file1_message.count
+    refute_equal 0, bw.file1_message.count
   end
 
   def test_it_can_break_down_braille_message
@@ -39,7 +39,6 @@ class BrailleWriterTest < MiniTest::Test
   end
 
   def test_it_can_write_braille_to_file
-
     bw = BrailleWriter.new('test_message.txt', 'test_braille.txt')
     bw.create_file1_message
     bw.write_braille_loop
