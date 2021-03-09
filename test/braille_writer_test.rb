@@ -5,48 +5,45 @@ require './lib/braille_dictionary'
 class BrailleWriterTest < MiniTest::Test
 
   def test_it_exists
-    class_manager = BrailleWriter.new('message.txt', 'test_braille.txt')
-    assert_instance_of BrailleWriter, class_manager
+    bw = BrailleWriter.new('message.txt', 'test_braille.txt')
+   
+    assert_instance_of BrailleWriter, bw
   end
 
   def test_it_has_attributes
-    class_manager = BrailleWriter.new("test_message.txt", "test_braille.txt")
-    assert_equal 'test_message.txt', class_manager.file1
-    assert_equal 'test_braille.txt', class_manager.file2
+    bw = BrailleWriter.new("test_message.txt", "test_braille.txt")
+   
+    assert_equal 'test_message.txt', bw.file1
+    assert_equal 'test_braille.txt', bw.file2
   end
   def test_it_can_store_file_message
-    class_manager = BrailleWriter.new('test_message.txt', 'test_braille.txt')
-    assert_equal [], class_manager.file1_message
+    bw = BrailleWriter.new('test_message.txt', 'test_braille.txt')
+    
+    assert_equal [], bw.file1_message
   end
 
   def test_it_can_add_file1_message
-    class_manager = BrailleWriter.new("test_message.txt", "test_braille.txt")
-    class_manager.create_file1_message
+    bw = BrailleWriter.new("test_message.txt", "test_braille.txt")
+    bw.create_file1_message
     
-    refute_equal nil, class_manager.file1_message.count
+    refute_equal nil, bw.file1_message.count
   end
 
-  # def test_it_can_write_data_to_a_file
-  #   skip
-  #   class_manager = ClassManager.new('test_message.txt', 'test_braille.txt')
-  #   class_manager.create_file1_message
-  #   class_manager.convert_to_braille
-  #   assert_equal class_manager.file1.length, class_manager.write_to_next_file
-  # end
-
-  def test_it_can_convert_values_to_braille
-    class_manager = BrailleWriter.new('test_message.txt', 'test_braille.txt')
-    class_manager.create_file1_message
-    class_manager.convert_to_braille
-    assert_equal class_manager.file1_message.count, class_manager.braille_message.count
+  def test_it_can_break_down_braille_message
+    bw = BrailleWriter.new("test_message.txt", "test_braille.txt")
+    File.open(bw.file2, 'w') {|file| file.truncate(0)}
+    bw.create_file1_message
+    bw.break_down_braille_message
+    
+    assert_equal 3, File.readlines(bw.file2).length
   end
 
   def test_it_can_write_braille_to_file
-    class_manager = BrailleWriter.new('test_message.txt', 'test_braille.txt')
-    class_manager.create_file1_message
-    class_manager.convert_to_braille
-    class_manager.write_braille
-    refute_equal nil, File.readlines(class_manager.file2)
+
+    bw = BrailleWriter.new('test_message.txt', 'test_braille.txt')
+    bw.create_file1_message
+    bw.write_braille_loop
+    assert_equal 9 , File.readlines(bw.file2).length
   end
 end
 

@@ -1,1 +1,1 @@
-here is some new text that is a bit over eighty characters but not over the one hundred and sixty count
+hello world i am going to test if i can print multiple lines of braille to ensure its all working

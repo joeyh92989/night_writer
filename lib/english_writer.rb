@@ -3,8 +3,8 @@ class EnglishWriter
   attr_reader :file1,
               :file2,
               :file1_message,
-              :braille_dictionary,
-              :braille_message
+              :english_dictionary,
+              :english_message
 
   def initialize(file1, file2)
     @file1 = file1
@@ -37,7 +37,6 @@ class EnglishWriter
     @file1_message = string_pairs.map do |line|
       line[0].zip(line[1], line[2])
     end
-    require 'pry'; binding.pry
   end
 
   def convert_to_english
