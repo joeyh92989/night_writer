@@ -1,5 +1,4 @@
-require 'minitest/autorun'
-require 'minitest/nyan_cat'
+require './test/test_helper'
 require './lib/english_dictionary'
 
 class EnglishDictionaryTest < MiniTest::Test
