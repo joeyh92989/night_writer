@@ -10,8 +10,10 @@ class EnglishWriter
     @file1 = file1
     @file2 = file2
     @file1_message =[]
-    @english_dictionary = EnglishDictionary.new
-    @english_message= []
+    create_file1_message
+    @english_translator = EnglishTranslator.new(@file1_message)
+    # @english_dictionary = EnglishDictionary.new
+    # @english_message= []
   end
 
   def print_message
@@ -39,16 +41,16 @@ class EnglishWriter
     end
   end
 
-  def convert_to_english
-    text_array = @file1_message.map do |letters|
-      letters.map do |letter|
-        (@english_dictionary.alphabet_hash[letter])
-    end
-   end
-      text_array.each do |array|
-        @english_message.push(array)
-    end
-  end
+  # def convert_to_english
+  #   text_array = @file1_message.map do |letters|
+  #     letters.map do |letter|
+  #       (@english_dictionary.alphabet_hash[letter])
+  #   end
+  #  end
+  #     text_array.each do |array|
+  #       @english_message.push(array)
+  #   end
+  # end
 
   def write_english
     File.open(@file2, 'w') {|file| file.truncate(0) }

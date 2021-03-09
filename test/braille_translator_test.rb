@@ -25,5 +25,4 @@ class BrailleTranslatorTest < MiniTest::Test
     bt.convert_to_braille
     assert_equal 40 , bt.braille_message[0].count
   end
-
 end

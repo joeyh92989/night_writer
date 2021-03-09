@@ -16,7 +16,7 @@ class BrailleWriterTest < MiniTest::Test
   end
   def test_it_can_store_file_message
     class_manager = EnglishWriter.new('test_braille_message.txt', 'test_english_conversion.txt')
-    assert_equal [], class_manager.file1_message
+    refute_equal 0, class_manager.file1_message.count
   end
 
   def test_it_can_add_file1_message
@@ -36,7 +36,7 @@ class BrailleWriterTest < MiniTest::Test
   # end
 
   def test_it_can_convert_values_to_english
-    
+    skip
     class_manager = EnglishWriter.new('test_braille_message.txt', 'test_english_conversion.txt')
     class_manager.create_file1_message
     class_manager.convert_to_english
@@ -44,7 +44,7 @@ class BrailleWriterTest < MiniTest::Test
   end
 
   def test_it_can_write_english_to_file
-    
+    skip
     class_manager = EnglishWriter.new('test_braille_message.txt', 'test_english_conversion.txt')
     class_manager.create_file1_message
     class_manager.convert_to_english
